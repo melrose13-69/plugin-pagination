@@ -1,0 +1,36 @@
+{
+  "name": "poltoratchi-pagination-js-plugin",
+  "version": "1.0.0",
+  "description": "my plugin pagination",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
+  },
+  "keywords": [
+    "plugin",
+    "pagination",
+    "js",
+    "purejs"
+  ],
+  "author": "Poltoratchi Victor",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.3.4",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^6.2.0",
+    "cssnano": "^5.0.8",
+    "html-webpack-plugin": "^5.3.2",
+    "node-sass": "^6.0.1",
+    "postcss-loader": "^6.1.1",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.2.1"
+  }
+}

@@ -1,0 +1,57 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+.pagination-plugin {
+  .selected-siblings-pages {
+    margin: 5px !important;
+    &::before {
+      content: "" !important;
+    }
+  }
+  &__wrapper {
+    &-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      height: 25px;
+      border: 1px solid;
+      border-radius: 50%;
+      margin: 5px;
+      cursor: pointer;
+      &.pagination-firstPage {
+        margin: 5px 20px 5px 5px;
+        position: relative;
+        &::before {
+          right: -27px;
+        }
+      }
+      &.pagination-lastPage {
+        margin: 5px 5px 5px 20px;
+        position: relative;
+        &::before {
+          left: -27px;
+        }
+      }
+      &.pagination-firstPage::before,
+      &.pagination-lastPage::before {
+        content: "...";
+        position: absolute;
+        z-index: 2;
+        font-size: 35px;
+        color: #000;
+      }
+    }
+  }
+}
+
+
+
