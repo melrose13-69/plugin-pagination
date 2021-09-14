@@ -35,7 +35,7 @@ const pagination = new Pagination(paginationWrapper, { options })
 
 > `pageHandle: function` Custom function for click the page buttons -
 
-> `optional | default: `.
+> `optional | default: `
 ```js
     function handlePage(pageNumber, event, target) {
         pagination.changePage(pageNumber)
