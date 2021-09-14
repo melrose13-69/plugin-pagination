@@ -6,8 +6,6 @@ VanillaJS Pagination Plugin with custom handler
 # Install
 ```js
 npm install poltoratchi-pagination-js-plugin
-
-import Pagination from 'poltoratchi-pagination-js-plugin';
 ```
 
 > or use `pagination.js` file from `dist` folder. `Pagination` will be available on `window`.
@@ -18,6 +16,9 @@ import Pagination from 'poltoratchi-pagination-js-plugin';
 ```
 
 ```js
+import Pagination from 'poltoratchi-pagination-js-plugin';
+
+
 const paginationWrapper = document.querySelector('#pagination')
 const pagination = new Pagination(paginationWrapper, { options })
 ```
