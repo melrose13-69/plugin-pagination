@@ -38,12 +38,12 @@ const pagination = new Pagination(paginationWrapper, { options })
 > `optional | default: `.
 ```js
     function handlePage(pageNumber, event, target) {
-        MyPagination.changePage(pageNumber)
+        pagination.changePage(pageNumber)
     }
 ```
 
 # Methods
-> `MyPagination.changePage(pageNumber)` Change the page `pageNumber: string|number`
+> `pagination.changePage(pageNumber)` Change the page `pageNumber: string|number`
 
 # CSS classes
 You can override style using these classes
