@@ -45,10 +45,5 @@ module.exports = {
             template: path.resolve( __dirname, 'index.html' )
         } ),
         new webpack.HotModuleReplacementPlugin(),
-        new CopyWebpackPlugin( {
-            patterns: [
-                {from: `${PATHS.src}demo.js`, to: `${PATHS.dist}`}
-            ]
-        } )
     ]
 };
