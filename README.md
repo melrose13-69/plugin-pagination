@@ -6,8 +6,6 @@ VanillaJS Pagination Plugin with custom handler
 # Install
 ```js
 npm install poltoratchi-pagination-js-plugin
-
-import Pagination from 'poltoratchi-pagination-js-plugin';
 ```
 
 > or use `pagination.js` file from `dist` folder. `Pagination` will be available on `window`.
@@ -18,6 +16,9 @@ import Pagination from 'poltoratchi-pagination-js-plugin';
 ```
 
 ```js
+import Pagination from 'poltoratchi-pagination-js-plugin';
+
+
 const paginationWrapper = document.querySelector('#pagination')
 const pagination = new Pagination(paginationWrapper, { options })
 ```
@@ -34,15 +35,15 @@ const pagination = new Pagination(paginationWrapper, { options })
 
 > `pageHandle: function` Custom function for click the page buttons -
 
-> `optional | default: `.
+> `optional | default: `
 ```js
     function handlePage(pageNumber, event, target) {
-        MyPagination.changePage(pageNumber)
+        pagination.changePage(pageNumber)
     }
 ```
 
 # Methods
-> `MyPagination.changePage(pageNumber)` Change the page `pageNumber: string|number`
+> `pagination.changePage(pageNumber)` Change the page `pageNumber: string|number`
 
 # CSS classes
 You can override style using these classes
