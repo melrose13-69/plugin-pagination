@@ -1,10 +1,18 @@
-export class Pagination {
+class Helpers {
+    static mathRoundUp( number ) {
+        return Math.round( number ) < number ? Math.round( number + 0.4 ) : Math.round( number );
+    }
+}
+
+export class Pagination extends Helpers {
     constructor( parent, settings = {} ) {
+        super();
         this.settings = {
             activeColor: 'red',
             activeClass: 'selected-page',
-            pageSize: 10,
             pagesShow: 5,
+            elements: null,
+            pageSize: null,
             pageHandle: this.changePage,
             ...settings
         };
@@ -26,16 +34,18 @@ export class Pagination {
         this.activeColor = this.settings.activeColor;
         this.activeClass = this.settings.activeClass;
         this.pageHandle = this.settings.pageHandle;
-
         this.changePage();
     }
 
     _getPages() {
-        return Math.round( this.elements / this.pageSize );
+        return Helpers.mathRoundUp( this.elements / this.pageSize );
     }
 
     _renderPagination( activePage ) {
         activePage = +activePage;
+        const errorCheck = this._errorCheck();
+
+        if ( errorCheck !== true ) throw errorCheck;
 
         this.parent.innerHTML = '';
         this.parent.classList.add( 'pagination-plugin' );
@@ -60,14 +70,14 @@ export class Pagination {
             } );
 
             if ( isFirstPage ) {
-                if ( activePage < this.pagesShow - this.lastStartBtn ) {
+                if ( activePage < this.pagesShow - this.lastStartBtn || pages === this.pagesShow + 2 ) {
                     page.classList.add( 'selected-siblings-pages' );
                 }
                 page.classList.add( 'pagination-firstPage' );
                 this.parent.prepend( page );
             }
             if ( isLastPage ) {
-                if ( activePage > pages - this.siblingsPagesCounter - 2 ) {
+                if ( activePage > pages - this.siblingsPagesCounter - 2 || pages === this.pagesShow + 2 ) {
                     page.classList.add( 'selected-siblings-pages' );
                 }
                 page.classList.add( 'pagination-lastPage' );
@@ -112,6 +122,19 @@ export class Pagination {
             }
         };
         makePagination();
+    }
+
+    _errorCheck() {
+        if ( !this.parent || !this.parent.nodeType || this.parent.nodeType !== 1 ) {
+            return new Error( `${this.parent} is not Node Element` );
+        }
+        if ( !this.pageSize ) {
+            return new Error( 'pageSize is required' );
+        }
+        if ( !this.elements ) {
+            return new Error( 'elements is required' );
+        }
+        return true;
     }
 
     changePage( page ) {

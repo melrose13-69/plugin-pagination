@@ -28,7 +28,7 @@ const pagination = new Pagination(paginationWrapper, { options })
 
 > `elements: number` Total elements data, from server `required`.
 
-> `pageSize: number` Page size `optional | default: 10`.
+> `pageSize: number` Page size `required`.
 
 > `pagesShow: number` Number of central pages `optional | default: 5`.
 
