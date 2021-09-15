@@ -1,6 +1,7 @@
 # Pagination-js-plugin
 VanillaJS Pagination Plugin with custom handler
 
+[GitHub Repository](https://github.com/melrose13-69/plugin-pagination)
 
 
 # Install

@@ -59,7 +59,7 @@ export class Pagination extends Helpers {
             const pages = this._getPages();
             const isFirstPage = counter === 1;
             const isLastPage = counter === pages;
-            let status = false;
+            let appendStatus = false;
 
             page.classList.add( 'pagination-plugin__wrapper-btn' );
             page.innerText = counter.toString();
@@ -87,29 +87,29 @@ export class Pagination extends Helpers {
             if ( !isFirstPage && !isLastPage ) {
                 if ( activePage < this.pagesShow - this.lastStartBtn ) {
                     if ( counter <= this.pagesShow + 1 ) {
-                        status = true;
+                        appendStatus = true;
                     }
                 } else if ( activePage >= pages - this.siblingsPagesCounter ) {
                     if ( counter >= pages - this.pagesShow ) {
-                        status = true;
+                        appendStatus = true;
                     }
                 } else {
                     if (
                         counter <= activePage &&
                         activePage - counter <= this.siblingsPagesCounter
                     ) {
-                        status = true;
+                        appendStatus = true;
                     }
                     if (
                         counter >= activePage &&
                         activePage - counter >= -this.siblingsPagesCounter
                     ) {
-                        status = true;
+                        appendStatus = true;
                     }
                 }
             }
 
-            if ( status ) {
+            if ( appendStatus ) {
                 this.pagesParent.appendChild( page );
             }
             if ( counter === activePage ) {
