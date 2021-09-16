@@ -44,10 +44,6 @@ export class Pagination extends Helpers {
         this.changePage();
     }
 
-    static instances() {
-        return new WeakMap();
-    }
-
     _getPages() {
         return Helpers.mathRoundUp( this.elements / this.pageSize );
     }

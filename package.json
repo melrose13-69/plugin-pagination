@@ -1,6 +1,6 @@
 {
   "name": "poltoratchi-pagination-js-plugin",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "my plugin pagination",
   "main": "dist/pagination.js",
   "scripts": {

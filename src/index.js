@@ -6,12 +6,3 @@ import { Pagination as defaultExport } from './lib/pagination';
 // I used `defaultExport` to state that variable name doesn't matter
 
 export default defaultExport;
-
-// import { Pagination } from './lib/pagination';
-//
-// const ul = document.querySelector( '#ul' );
-// const pagination = new Pagination( ul, {
-//     pageSize: 10,
-//     elements: 0
-// } );
-
