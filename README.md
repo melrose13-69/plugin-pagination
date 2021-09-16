@@ -46,6 +46,8 @@ const pagination = new Pagination(paginationWrapper, { options })
 # Methods
 > `pagination.changePage(pageNumber)` Change the page `pageNumber: string|number`
 
+> `pagination.destroy()` Destroy the pagination and remove elements;
+
 # CSS classes
 You can override style using these classes
 
