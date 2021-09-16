@@ -9,13 +9,3 @@ import { Pagination as defaultExport } from './lib/pagination';
 export default defaultExport;
 
 
-
-// import {Pagination} from './lib/pagination';
-//
-// const ul = document.querySelector('#ul');
-// const pagination = new Pagination(ul, {
-//     pageSize: 10,
-//     elements: 71
-// });
-
-

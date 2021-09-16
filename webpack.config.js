@@ -3,10 +3,12 @@ const webpack = require( 'webpack' );
 const HTMLWebpackPlugin = require( 'html-webpack-plugin' );
 const uglifyJsPlugin = require( 'uglifyjs-webpack-plugin' );
 const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
+const sass = require( 'node-sass' );
 
 const PATHS = {
     src: `${__dirname}/src/`,
-    dist: `${__dirname}/dist`
+    dist: `${__dirname}/dist`,
+    demo: `${__dirname}/demo`
 };
 const libraryName = 'pagination';
 
@@ -45,5 +47,20 @@ module.exports = {
             template: path.resolve( __dirname, 'index.html' )
         } ),
         new webpack.HotModuleReplacementPlugin(),
+        new CopyWebpackPlugin( {
+            patterns: [
+                { from: `${PATHS.src}lib/`, to: `${PATHS.demo}`, info: () => ({ minimized: true }) },
+                {
+                    from: `${PATHS.src}scss/`, to: `${PATHS.demo}/pagination.css`, transform( content, path ) {
+                        const result = sass.renderSync( {
+                            file: path,
+                            outputStyle: 'compressed'
+                        } );
+
+                        return result.css.toString();
+                    }
+                }
+            ]
+        } )
     ]
 };

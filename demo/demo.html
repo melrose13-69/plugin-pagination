@@ -2,18 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-                         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-             <title>Document</title>
+     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <title>Document</title>
+    <link rel="stylesheet" href="./pagination.css">
+    <link rel="stylesheet" href="./demo.css">
 </head>
 <body>
+
 
     <ul id="ul"></ul>
 
 
-
-
-<script src="../dist/pagination.js"></script>
-<script src="./demo.js"></script>
+<script src="./pagination.js"></script>
+<script>
+    const ul = document.querySelector('#ul');
+    const pagination = new Pagination(ul, {
+        pageSize: 15,
+        elements: 88
+    });
+</script>
 </body>
 </html>
