@@ -16,7 +16,14 @@ export class Pagination extends Helpers {
             pageHandle: this.changePage,
             ...settings
         };
-
+        this.cl = {
+            mainParent: 'pagination-plugin',
+            centerParent: 'pagination-plugin__wrapper',
+            page: 'pagination-plugin__wrapper-btn',
+            selectedSiblings: 'selected-siblings-pages',
+            lastPage: 'pagination-lastPage',
+            firstPage: 'pagination-firstPage'
+        };
         this.parent = parent;
         this.pagesShow =
             +this.settings.pagesShow % 2 === 0
@@ -45,14 +52,15 @@ export class Pagination extends Helpers {
         activePage = +activePage;
         const errorCheck = this._errorCheck();
 
+        if ( errorCheck === false ) return;
         if ( errorCheck !== true ) throw errorCheck;
 
         this.parent.innerHTML = '';
-        this.parent.classList.add( 'pagination-plugin' );
-        this.pagesParent = document.createElement( 'ul' );
-        this.pagesParent.classList.add( 'pagination-plugin__wrapper' );
+        this.parent.classList.add( this.cl.mainParent );
+        const pagesParent = document.createElement( 'ul' );
+        pagesParent.classList.add( this.cl.centerParent );
 
-        this.parent.append( this.pagesParent );
+        this.parent.append( pagesParent );
 
         const makePagination = ( counter = 1 ) => {
             const page = document.createElement( 'li' );
@@ -61,26 +69,26 @@ export class Pagination extends Helpers {
             const isLastPage = counter === pages;
             let appendStatus = false;
 
-            page.classList.add( 'pagination-plugin__wrapper-btn' );
+            page.classList.add( this.cl.page );
             page.innerText = counter.toString();
             page.setAttribute( 'data-page', counter.toString() );
 
             page.addEventListener( 'click', ( e ) => {
                 this.pageHandle( counter, e, page );
-            } );
+            }, { once: true } );
 
             if ( isFirstPage ) {
-                if ( activePage < this.pagesShow - this.lastStartBtn || pages === this.pagesShow + 2 ) {
-                    page.classList.add( 'selected-siblings-pages' );
+                if ( activePage < this.pagesShow - this.lastStartBtn || pages <= this.pagesShow + 2 ) {
+                    page.classList.add( this.cl.selectedSiblings );
                 }
-                page.classList.add( 'pagination-firstPage' );
+                page.classList.add( this.cl.firstPage );
                 this.parent.prepend( page );
             }
             if ( isLastPage ) {
-                if ( activePage > pages - this.siblingsPagesCounter - 2 || pages === this.pagesShow + 2 ) {
-                    page.classList.add( 'selected-siblings-pages' );
+                if ( activePage > pages - this.siblingsPagesCounter - 2 || pages <= this.pagesShow + 2 ) {
+                    page.classList.add( this.cl.selectedSiblings );
                 }
-                page.classList.add( 'pagination-lastPage' );
+                page.classList.add( this.cl.lastPage );
                 this.parent.append( page );
             }
 
@@ -110,7 +118,7 @@ export class Pagination extends Helpers {
             }
 
             if ( appendStatus ) {
-                this.pagesParent.appendChild( page );
+                pagesParent.appendChild( page );
             }
             if ( counter === activePage ) {
                 page.classList.add( this.activeClass );
@@ -124,6 +132,11 @@ export class Pagination extends Helpers {
         makePagination();
     }
 
+    destroy() {
+        this.parent.innerHTML = '';
+        this.parent.removeAttribute( 'class' );
+    }
+
     _errorCheck() {
         if ( !this.parent || !this.parent.nodeType || this.parent.nodeType !== 1 ) {
             return new Error( `${this.parent} is not Node Element` );
@@ -131,8 +144,13 @@ export class Pagination extends Helpers {
         if ( !this.pageSize ) {
             return new Error( 'pageSize is required' );
         }
-        if ( !this.elements ) {
+        if ( !this.elements && this.elements !== 0 ) {
             return new Error( 'elements is required' );
+        }
+
+        if ( this.elements === 0 ) {
+            this.destroy();
+            return false;
         }
         return true;
     }
