@@ -15,17 +15,19 @@ export class Pagination extends Helpers {
             elements: null,
             pageSize: null,
             pageHandle: this.changePage,
-            ...settings
-        };
-        this.cl = {
-            mainParent: 'pagination-plugin',
-            centerParent: 'pagination-plugin__wrapper',
-            page: 'pagination-plugin__wrapper-btn',
-            selectedSiblings: 'selected-siblings-pages',
-            lastPage: 'pagination-lastPage',
-            firstPage: 'pagination-firstPage'
+            ...settings,
+            classes: {
+                mainParent: 'pagination-plugin',
+                centerParent: 'pagination-plugin__wrapper',
+                page: 'pagination-plugin__wrapper-btn',
+                selectedSiblings: 'selected-siblings-pages',
+                lastPage: 'pagination-lastPage',
+                firstPage: 'pagination-firstPage',
+                ...settings.classes
+            }
         };
 
+        console.log( this.settings );
         this.init();
     }
 
@@ -39,7 +41,7 @@ export class Pagination extends Helpers {
         this.pageHandle = this.settings.pageHandle;
         this.activeColor = this.settings.activeColor;
         this.activeClass = this.settings.activeClass;
-
+        this.cl = this.settings.classes;
         this.pagesShow =
             +this.settings.pagesShow % 2 === 0
                 ? +this.settings.pagesShow + 1

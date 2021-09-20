@@ -34,6 +34,19 @@ const pagination = new Pagination(paginationWrapper, { options });
 
 > `pagesShow: number` Number of central pages `optional | default: 5`.
 
+> `classes: {object}` Classes for pagination elements `optional | default:` -
+```js
+    classes: {
+        mainParent: 'pagination-plugin', // class name of pagination wrapper
+        centerParent: 'pagination-plugin__wrapper', // class name of centered pages wrapper
+        page: 'pagination-plugin__wrapper-btn', // class name of page
+        selectedSiblings: 'selected-siblings-pages', // class name of elements if activePage is first elements or last
+        lastPage: 'pagination-lastPage', // class name of last page
+        firstPage: 'pagination-firstPage', // class name of first page
+    }
+```
+
+
 > `pageHandle: function` Custom function for click the page buttons -
 
 > `optional | default: `

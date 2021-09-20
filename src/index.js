@@ -10,14 +10,14 @@ import { Pagination } from './lib/pagination';
 const ul1 = document.querySelector( '#ul1' );
 const pagination1 = new Pagination( ul1, {
     pageSize: 15,
-    elements: 897
+    elements: 897,
 } );
 
 
-setTimeout(function (  ) {
-    pagination1.rebuild({
-        pageSize: 3
-    })
-}, 5000);
+// setTimeout(function () {
+//     pagination1.rebuild({
+//         pageSize: 3
+//     })
+// }, 5000);
 
 // export default defaultExport;
