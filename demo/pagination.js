@@ -26,21 +26,21 @@ export class Pagination extends Helpers {
         };
         this.parent = parent;
         this.pagesShow =
-            +this.settings.pagesShow % 2 === 0
-                ? +this.settings.pagesShow + 1
-                : +this.settings.pagesShow;
+            +this.defaultSettings.pagesShow % 2 === 0
+                ? +this.defaultSettings.pagesShow + 1
+                : +this.defaultSettings.pagesShow;
 
-        this.elements = +this.settings.elements;
-        this.pageSize = +this.settings.pageSize;
+        this.elements = +this.defaultSettings.elements;
+        this.pageSize = +this.defaultSettings.pageSize;
         this.siblingsPagesCounter = Math.floor( this.pagesShow / 2 );
         this.lastStartBtn =
             this.siblingsPagesCounter !== 2
                 ? Math.floor( this.siblingsPagesCounter / 2 )
                 : 0;
 
-        this.activeColor = this.settings.activeColor;
-        this.activeClass = this.settings.activeClass;
-        this.pageHandle = this.settings.pageHandle;
+        this.activeColor = this.defaultSettings.activeColor;
+        this.activeClass = this.defaultSettings.activeClass;
+        this.pageHandle = this.defaultSettings.pageHandle;
         this.changePage();
     }
 
