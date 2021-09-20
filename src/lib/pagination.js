@@ -34,7 +34,11 @@ export class Pagination extends Helpers {
     _createOptions( options = {} ) {
         this.settings = {
             ...this.settings,
-            ...options
+            ...options,
+            classes: {
+                ...this.classes,
+                ...options.classes
+            }
         };
         this.elements = +this.settings.elements;
         this.pageSize = +this.settings.pageSize;
