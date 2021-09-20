@@ -26,8 +26,6 @@ export class Pagination extends Helpers {
                 ...settings.classes
             }
         };
-
-        console.log( this.settings );
         this.init();
     }
 
@@ -36,7 +34,7 @@ export class Pagination extends Helpers {
             ...this.settings,
             ...options,
             classes: {
-                ...this.classes,
+                ...this.settings.classes,
                 ...options.classes
             }
         };
@@ -55,15 +53,13 @@ export class Pagination extends Helpers {
             this.siblingsPagesCounter !== 2
                 ? Math.floor( this.siblingsPagesCounter / 2 )
                 : 0;
+        this.pages = Helpers.mathRoundUp( this.elements / this.pageSize );
     }
 
-    _getPages() {
-        return Helpers.mathRoundUp( this.elements / this.pageSize );
-    }
 
     _renderPagination( activePage = 1 ) {
         activePage = +activePage;
-        const errorCheck = this._errorCheck();
+        const errorCheck = this._errorCheck( activePage );
 
         if ( errorCheck === false ) return;
         if ( errorCheck !== true ) throw errorCheck;
@@ -77,9 +73,8 @@ export class Pagination extends Helpers {
 
         const makePagination = ( counter = 1 ) => {
             const page = document.createElement( 'li' );
-            const pages = this._getPages();
             const isFirstPage = counter === 1;
-            const isLastPage = counter === pages;
+            const isLastPage = counter === this.pages;
             let appendStatus = false;
             page.classList.add( this.cl.page );
             page.innerText = counter.toString();
@@ -90,14 +85,14 @@ export class Pagination extends Helpers {
             }, { once: true } );
 
             if ( isFirstPage ) {
-                if ( activePage < this.pagesShow - this.lastStartBtn || pages <= this.pagesShow + 2 ) {
+                if ( activePage < this.pagesShow - this.lastStartBtn || this.pages <= this.pagesShow + 2 ) {
                     page.classList.add( this.cl.selectedSiblings );
                 }
                 page.classList.add( this.cl.firstPage );
                 this.parent.prepend( page );
             }
             if ( isLastPage ) {
-                if ( activePage > pages - this.siblingsPagesCounter - 2 || pages <= this.pagesShow + 2 ) {
+                if ( activePage > this.pages - this.siblingsPagesCounter - 2 || this.pages <= this.pagesShow + 2 ) {
                     page.classList.add( this.cl.selectedSiblings );
                 }
                 page.classList.add( this.cl.lastPage );
@@ -109,8 +104,8 @@ export class Pagination extends Helpers {
                     if ( counter <= this.pagesShow + 1 ) {
                         appendStatus = true;
                     }
-                } else if ( activePage >= pages - this.siblingsPagesCounter ) {
-                    if ( counter >= pages - this.pagesShow ) {
+                } else if ( activePage >= this.pages - this.siblingsPagesCounter ) {
+                    if ( counter >= this.pages - this.pagesShow ) {
                         appendStatus = true;
                     }
                 } else {
@@ -137,10 +132,11 @@ export class Pagination extends Helpers {
                 page.style.color = this.activeColor;
             }
 
-            if ( counter !== pages ) {
+            if ( counter !== this.pages ) {
                 makePagination( counter + 1 );
             }
         };
+
         return makePagination;
     }
 
@@ -154,22 +150,22 @@ export class Pagination extends Helpers {
         this._renderPagination()();
     }
 
-    _errorCheck() {
-        if ( !this.parent || !this.parent.nodeType || this.parent.nodeType !== 1 ) {
-            return new Error( `${this.parent} is not Node Element` );
+    _errorCheck( page ) {
+        switch ( true ) {
+            case(!this.parent || !this.parent.nodeType || this.parent.nodeType !== 1):
+                return new Error( `${ this.parent } is not Node Element` );
+            case(!this.pageSize):
+                return new Error( `${ this.parent } is not Node Element` );
+            case(!this.elements && this.elements !== 0):
+                return new Error( 'pageSize is required' );
+            case(this.elements === 0):
+                this.destroy();
+                return false;
+            case(page > this.pages):
+                return new Error( `Page ${ page } is more than the total number of pages` );
+            default:
+                return true;
         }
-        if ( !this.pageSize ) {
-            return new Error( 'pageSize is required' );
-        }
-        if ( !this.elements && this.elements !== 0 ) {
-            return new Error( 'elements is required' );
-        }
-
-        if ( this.elements === 0 ) {
-            this.destroy();
-            return false;
-        }
-        return true;
     }
 
     changePage( page ) {

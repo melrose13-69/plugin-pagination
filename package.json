@@ -1,11 +1,11 @@
 {
   "name": "poltoratchi-pagination-js-plugin",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "my plugin pagination",
   "main": "dist/pagination.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "build": "webpack --mode=production",
+    "start": "webpack-dev-server --open --mode=development"
   },
   "keywords": [
     "plugin",
