@@ -3,6 +3,11 @@ VanillaJS Pagination Plugin with custom handler
 
 [GitHub Repository](https://github.com/melrose13-69/plugin-pagination)
 
+# Demo
+VanillaJS Pagination Plugin with custom handler
+
+[Demo Link](https://melrose13-69.github.io/plugin-pagination/demo/demo.html)
+
 
 # Install
 ```js
