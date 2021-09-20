@@ -57,7 +57,7 @@ const pagination = new Pagination(paginationWrapper, { options });
 ```
 
 # Methods
-> `pagination.changePage(pageNumber)` Change the page `pageNumber: string|number`
+> `pagination.changePage(pageNumber)` Change the page `pageNumber: number`
 
 > `pagination.destroy()` Destroy the pagination and remove elements;
 
