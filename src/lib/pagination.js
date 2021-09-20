@@ -63,7 +63,6 @@ export class Pagination extends Helpers {
 
         if ( errorCheck === false ) return;
         if ( errorCheck !== true ) throw errorCheck;
-
         this.parent.innerHTML = '';
         this.parent.classList.add( this.cl.mainParent );
         const pagesParent = document.createElement( 'ul' );
@@ -137,7 +136,7 @@ export class Pagination extends Helpers {
             }
         };
 
-        return makePagination;
+        makePagination()
     }
 
     destroy() {
@@ -147,7 +146,7 @@ export class Pagination extends Helpers {
 
     init(options = {}) {
         this._createOptions(options);
-        this._renderPagination()();
+        this._renderPagination();
     }
 
     _errorCheck( page ) {
@@ -170,7 +169,7 @@ export class Pagination extends Helpers {
 
     changePage( page ) {
         page = page === undefined ? 1 : page;
-        this._renderPagination( page )();
+        this._renderPagination( page );
     }
 
     rebuild( options ) {
