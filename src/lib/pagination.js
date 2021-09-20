@@ -1,12 +1,13 @@
 class Helpers {
     static mathRoundUp( number ) {
-        return Math.round( number ) < number ? Math.round( number + 0.4 ) : Math.round( number );
+        return Math.round( number ) < number ? Math.round( number + 0.49 ) : Math.round( number );
     }
 }
 
 export class Pagination extends Helpers {
     constructor( parent, settings = {} ) {
         super();
+        this.parent = parent;
         this.settings = {
             activeColor: 'red',
             activeClass: 'selected-page',
@@ -14,41 +15,53 @@ export class Pagination extends Helpers {
             elements: null,
             pageSize: null,
             pageHandle: this.changePage,
-            ...settings
+            ...settings,
+            classes: {
+                mainParent: 'pagination-plugin',
+                centerParent: 'pagination-plugin__wrapper',
+                page: 'pagination-plugin__wrapper-btn',
+                selectedSiblings: 'selected-siblings-pages',
+                lastPage: 'pagination-lastPage',
+                firstPage: 'pagination-firstPage',
+                ...settings.classes
+            }
         };
-        this.cl = {
-            mainParent: 'pagination-plugin',
-            centerParent: 'pagination-plugin__wrapper',
-            page: 'pagination-plugin__wrapper-btn',
-            selectedSiblings: 'selected-siblings-pages',
-            lastPage: 'pagination-lastPage',
-            firstPage: 'pagination-firstPage'
+
+        console.log( this.settings );
+        this.init();
+    }
+
+    _createOptions( options = {} ) {
+        this.settings = {
+            ...this.settings,
+            ...options,
+            classes: {
+                ...this.classes,
+                ...options.classes
+            }
         };
-        this.parent = parent;
+        this.elements = +this.settings.elements;
+        this.pageSize = +this.settings.pageSize;
+        this.pageHandle = this.settings.pageHandle;
+        this.activeColor = this.settings.activeColor;
+        this.activeClass = this.settings.activeClass;
+        this.cl = this.settings.classes;
         this.pagesShow =
             +this.settings.pagesShow % 2 === 0
                 ? +this.settings.pagesShow + 1
                 : +this.settings.pagesShow;
-
-        this.elements = +this.settings.elements;
-        this.pageSize = +this.settings.pageSize;
         this.siblingsPagesCounter = Math.floor( this.pagesShow / 2 );
         this.lastStartBtn =
             this.siblingsPagesCounter !== 2
                 ? Math.floor( this.siblingsPagesCounter / 2 )
                 : 0;
-
-        this.activeColor = this.settings.activeColor;
-        this.activeClass = this.settings.activeClass;
-        this.pageHandle = this.settings.pageHandle;
-        this.changePage();
     }
 
     _getPages() {
         return Helpers.mathRoundUp( this.elements / this.pageSize );
     }
 
-    _renderPagination( activePage ) {
+    _renderPagination( activePage = 1 ) {
         activePage = +activePage;
         const errorCheck = this._errorCheck();
 
@@ -68,7 +81,6 @@ export class Pagination extends Helpers {
             const isFirstPage = counter === 1;
             const isLastPage = counter === pages;
             let appendStatus = false;
-
             page.classList.add( this.cl.page );
             page.innerText = counter.toString();
             page.setAttribute( 'data-page', counter.toString() );
@@ -129,12 +141,17 @@ export class Pagination extends Helpers {
                 makePagination( counter + 1 );
             }
         };
-        makePagination();
+        return makePagination;
     }
 
     destroy() {
         this.parent.innerHTML = '';
         this.parent.removeAttribute( 'class' );
+    }
+
+    init() {
+        this._createOptions();
+        this._renderPagination()();
     }
 
     _errorCheck() {
@@ -157,6 +174,11 @@ export class Pagination extends Helpers {
 
     changePage( page ) {
         page = page === undefined ? 1 : page;
-        this._renderPagination( page );
+        this._renderPagination( page )();
+    }
+
+    rebuild( options ) {
+        this._createOptions( options );
+        this._renderPagination()();
     }
 }

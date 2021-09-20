@@ -1,10 +1,10 @@
 class Helpers {
     static mathRoundUp( number ) {
-        return Math.round( number ) < number ? Math.round( number + 0.4 ) : Math.round( number );
+        return Math.round( number ) < number ? Math.round( number + 0.49 ) : Math.round( number );
     }
 }
 
-export class Pagination extends Helpers {
+class Pagination extends Helpers {
     constructor( parent, settings = {} ) {
         super();
         this.settings = {
@@ -68,7 +68,7 @@ export class Pagination extends Helpers {
             const isFirstPage = counter === 1;
             const isLastPage = counter === pages;
             let appendStatus = false;
-
+            console.log( pages );
             page.classList.add( this.cl.page );
             page.innerText = counter.toString();
             page.setAttribute( 'data-page', counter.toString() );
@@ -129,7 +129,7 @@ export class Pagination extends Helpers {
                 makePagination( counter + 1 );
             }
         };
-        makePagination();
+        return makePagination;
     }
 
     destroy() {
@@ -157,6 +157,6 @@ export class Pagination extends Helpers {
 
     changePage( page ) {
         page = page === undefined ? 1 : page;
-        this._renderPagination( page );
+        this._renderPagination( page )();
     }
 }

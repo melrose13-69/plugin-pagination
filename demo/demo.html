@@ -6,21 +6,86 @@
      <meta http-equiv="X-UA-Compatible" content="ie=edge">
      <title>Document</title>
     <link rel="stylesheet" href="./pagination.css">
+    <link rel="stylesheet" href="./rainbow.css">
     <link rel="stylesheet" href="./demo.css">
 </head>
 <body>
+    <div class="demo">
+        <div class="container">
+            <div class="demo__inner">
+                <div class="demo__inner-item">
+                    <div class="demo__inner-item--pagination">
+                        <ul id="ul1"></ul>
+                    </div>
+                    <div class="demo_-inner-item--code">
+                        <pre>
+                            <code data-language="javascript">
+                                const ul = document.querySelector( '#ul1' );
+                                const pagination = new Pagination( ul, {
+                                    pageSize: 15, // required
+                                    elements: 88 // required
+                                } );
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="demo__inner-item">
+                    <div class="demo__inner-item--pagination">
+                        <ul id="ul2"></ul>
+                    </div>
+                    <div class="demo_-inner-item--code">
+                        <pre>
+                            <code data-language="javascript">
+                                const ul = document.querySelector( '#ul' );
+                                const pagination = new Pagination( ul, {
+                                    pageSize: 15, // required
+                                    elements: 88 // required
+                                } );
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="demo__inner-item">
+                    <div class="demo__inner-item--pagination">
+                        <ul id="ul3"></ul>
+                    </div>
+                    <div class="demo_-inner-item--code">
+                        <pre>
+                            <code data-language="javascript">
+                                const ul = document.querySelector( '#ul' );
+                                const pagination = new Pagination( ul, {
+                                    pageSize: 15, // required
+                                    elements: 88 // required
+                                } );
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-    <ul id="ul"></ul>
 
 
+<script src="./rainbow-custom.min.js"></script>
 <script src="./pagination.js"></script>
 <script>
-    const ul = document.querySelector('#ul');
-    const pagination = new Pagination(ul, {
+    const ul1 = document.querySelector( '#ul1' );
+    const pagination1 = new Pagination( ul1, {
         pageSize: 15,
-        elements: 88
-    });
+        elements: 2
+    } );
+    // const ul2 = document.querySelector( '#ul2' );
+    // const pagination2 = new Pagination( ul2, {
+    //     pageSize: 15,
+    //     elements: 88
+    // } );
+    // const ul3 = document.querySelector( '#ul3' );
+    // const pagination3 = new Pagination( ul3, {
+    //     pageSize: 15,
+    //     elements: 88
+    // } );
 </script>
 </body>
 </html>
