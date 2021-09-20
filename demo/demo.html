@@ -1,91 +1,231 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <link rel="stylesheet" href="./pagination.css">
     <link rel="stylesheet" href="./rainbow.css">
     <link rel="stylesheet" href="./demo.css">
 </head>
 <body>
-    <div class="demo">
-        <div class="container">
-            <div class="demo__inner">
-                <div class="demo__inner-item">
-                    <div class="demo__inner-item--pagination">
-                        <ul id="ul1"></ul>
-                    </div>
-                    <div class="demo_-inner-item--code">
-                        <pre>
-                            <code data-language="javascript">
-                                const ul = document.querySelector( '#ul1' );
-                                const pagination = new Pagination( ul, {
-                                    pageSize: 15, // required
-                                    elements: 88 // required
-                                } );
-                            </code>
-                        </pre>
-                    </div>
+<div class="demo">
+    <div class="container">
+        <div class="demo__inner">
+            <div class="demo__inner-title">
+
+            </div>
+            <div class="demo__inner-item">
+                <h1 class="demo__inner-item--title">Import pagination from directory</h1>
+                <p class="demo__inner-item--description"></p>
+                <div class="demo__inner-item--pagination">
                 </div>
-                <div class="demo__inner-item">
-                    <div class="demo__inner-item--pagination">
-                        <ul id="ul2"></ul>
-                    </div>
-                    <div class="demo_-inner-item--code">
+                <div class="demo_-inner-item--code">
                         <pre>
                             <code data-language="javascript">
-                                const ul = document.querySelector( '#ul' );
-                                const pagination = new Pagination( ul, {
-                                    pageSize: 15, // required
-                                    elements: 88 // required
-                                } );
+                                import Pagination from 'poltoratchi-pagination-js-plugin';
                             </code>
                         </pre>
-                    </div>
                 </div>
-                <div class="demo__inner-item">
-                    <div class="demo__inner-item--pagination">
-                        <ul id="ul3"></ul>
-                    </div>
-                    <div class="demo_-inner-item--code">
+            </div>
+            <div class="demo__inner-item">
+                <h1 class="demo__inner-item--title">Initial connection</h1>
+                <p class="demo__inner-item--description">Required parameter stack for connection</p>
+                <div class="demo__inner-item--pagination">
+                    <ul id="pagination_1"></ul>
+                </div>
+                <div class="demo_-inner-item--code">
                         <pre>
                             <code data-language="javascript">
-                                const ul = document.querySelector( '#ul' );
-                                const pagination = new Pagination( ul, {
-                                    pageSize: 15, // required
-                                    elements: 88 // required
+                                const paginationWrapper1 = document.querySelector( '#pagination-1' );
+                                // you can use JQUERY const paginationWrapper1 = $('#pagination01')[0]
+
+                                const pagination1 = new Pagination( paginationWrapper1, {
+                                    pageSize: 10,
+                                    elements: 101
                                 } );
                             </code>
                         </pre>
-                    </div>
+                </div>
+            </div>
+            <div class="demo__inner-item">
+                <h1 class="demo__inner-item--title">More center pages to show</h1>
+                <p class="demo__inner-item--description">The number of pages for the central display must be an odd
+                    number (even if you enter an even number, it is incremented by 1)</p>
+                <div class="demo__inner-item--pagination">
+                    <ul id="pagination_2"></ul>
+                </div>
+                <div class="demo_-inner-item--code">
+                        <pre>
+                            <code data-language="javascript">
+                                const paginationWrapper2 = document.querySelector( '#pagination-2' );
+
+                                const pagination2 = new Pagination( paginationWrapper2, {
+                                    pageSize: 10,
+                                    elements: 181,
+                                    pagesShow: 11
+                                } );
+                            </code>
+                        </pre>
+                </div>
+            </div>
+            <div class="demo__inner-item">
+                <h1 class="demo__inner-item--title">Custom handler</h1>
+                <p class="demo__inner-item--description">You can make a custom handler function for pagination</p>
+                <div class="demo__inner-item--pagination">
+                    <ul id="pagination_3"></ul>
+                </div>
+                <div class="demo__inner-item--demos">
+                    <span><span>Current page: </span><span id="current-page-counter">1</span></span>
+                </div>
+                <div class="demo_-inner-item--code">
+                        <pre>
+                            <code data-language="javascript">
+                                const paginationWrapper3 = document.querySelector( '#pagination-3' );
+                                const currentPageCounter = document.querySelector('#current-page-counter');
+
+                                const pagination3 = new Pagination( paginationWrapper3, {
+                                    pageSize: 10,
+                                    elements: 181,
+                                    pageHandle: function (pageNumber, lastPageNumber, event) {
+                                        this.changePage(pageNumber);
+                                        currentPageCounter.textContent = pageNumber;
+                                    }
+                                } );
+                            </code>
+                        </pre>
+                </div>
+            </div>
+            <div class="demo__inner-item">
+                <h1 class="demo__inner-item--title">Destroy / init</h1>
+                <p class="demo__inner-item--description">You can destroy pagination and initialize it again</p>
+                <div class="demo__inner-item--pagination">
+                    <ul id="pagination_4"></ul>
+                </div>
+                <div class="demo__inner-item--demos">
+                    <button id="destroy">Destroy</button>
+                    <button id="init">Init</button>
+                </div>
+                <div class="demo_-inner-item--code">
+                        <pre>
+                            <code data-language="javascript">
+                                const paginationWrapper4 = document.querySelector( '#pagination-3' );
+                                const destroyBtn = document.querySelector( '#destroy' );
+                                const initBtn = document.querySelector( '#init' );
+
+                                const pagination4 = new Pagination( paginationWrapper4, {
+                                    pageSize: 10,
+                                    elements: 181,
+                                } );
+
+                                initBtn.addEventListener('click', () => pagination4.init());
+                                destroyBtn.addEventListener('click', () => pagination4.destroy());
+                            </code>
+                        </pre>
+                </div>
+            </div>
+            <div class="demo__inner-item">
+                <h1 class="demo__inner-item--title">Rebuild</h1>
+                <p class="demo__inner-item--description">You can make rebuild pagination with new options</p>
+                <div class="demo__inner-item--pagination">
+                    <ul id="pagination_5"></ul>
+                </div>
+                <div class="demo__inner-item--demos inputs-wrapper">
+                    <input name="pageSize" type="text" id="new-page-size" placeholder="New page size"
+                           title="new page size">
+                    <input name="elements" type="text" id="new-elements-count" placeholder="New elements count"
+                           title="new elements count">
+                    <input name="pagesShow" type="text" id="new-page-show-elements" placeholder="New pages show elements"
+                           title="new page show elements">
+                    <button id="rebuild">Rebuild</button>
+                </div>
+                <div class="demo_-inner-item--code">
+                        <pre>
+                            <code data-language="javascript">
+                                const paginationWrapper5 = document.querySelector( '#pagination-3' );
+                                const inputsWrapper = document.querySelector( '.inputs-wrapper' );
+                                const rebuildBtn = document.querySelector( '#rebuild' );
+
+                                const pagination5 = new Pagination( paginationWrapper5, {
+                                    pageSize: 10,
+                                    elements: 181,
+                                    pagesShow: 5
+                                } );
+
+                                rebuildBtn.addEventListener( 'click', () => {
+                                    const newOptions = {};
+                                    inputsWrapper.querySelectorAll( 'input' ).forEach( input => {
+                                        if ( input.value.length > 0 && !isNaN( parseInt( input.value ) ) ) {
+                                            newOptions[input.name] = input.value
+                                        }
+                                    } );
+                                    pagination5.rebuild(newOptions)
+                                } );
+                            </code>
+                        </pre>
                 </div>
             </div>
         </div>
     </div>
-
-
+</div>
 
 
 <script src="./rainbow-custom.min.js"></script>
 <script src="./pagination.js"></script>
 <script>
-    const ul1 = document.querySelector( '#ul1' );
+    const ul1 = document.querySelector( '#pagination_1' );
     const pagination1 = new Pagination( ul1, {
-        pageSize: 15,
-        elements: 2
+        pageSize: 10,
+        elements: 101
     } );
-    // const ul2 = document.querySelector( '#ul2' );
-    // const pagination2 = new Pagination( ul2, {
-    //     pageSize: 15,
-    //     elements: 88
-    // } );
-    // const ul3 = document.querySelector( '#ul3' );
-    // const pagination3 = new Pagination( ul3, {
-    //     pageSize: 15,
-    //     elements: 88
-    // } );
+    const ul2 = document.querySelector( '#pagination_2' );
+    const pagination2 = new Pagination( ul2, {
+        pageSize: 10,
+        elements: 181,
+        pagesShow: 11
+    } );
+    const ul3 = document.querySelector( '#pagination_3' );
+    const currentPageCounter = document.querySelector( '#current-page-counter' );
+
+    const pagination3 = new Pagination( ul3, {
+        pageSize: 10,
+        elements: 181,
+        pageHandle: function ( pageNumber, lastPageNumber, event ) {
+            this.changePage( pageNumber );
+            currentPageCounter.textContent = pageNumber;
+        }
+    } );
+    const ul4 = document.querySelector( '#pagination_4' );
+    const destroyBtn = document.querySelector( '#destroy' );
+    const initBtn = document.querySelector( '#init' );
+    const pagination4 = new Pagination( ul4, {
+        pageSize: 10,
+        elements: 181,
+    } );
+    initBtn.addEventListener( 'click', () => pagination4.init() );
+    destroyBtn.addEventListener( 'click', () => pagination4.destroy() );
+
+    const ul5 = document.querySelector( '#pagination_5' );
+    const inputsWrapper = document.querySelector( '.inputs-wrapper' );
+    const rebuildBtn = document.querySelector( '#rebuild' );
+
+    const pagination5 = new Pagination( ul5, {
+        pageSize: 10,
+        elements: 181,
+        pagesShow: 5
+    } );
+
+    rebuildBtn.addEventListener( 'click', () => {
+        const newOptions = {};
+        inputsWrapper.querySelectorAll( 'input' ).forEach( ( input ) => {
+            if ( input.value.length > 0 && !isNaN( parseInt( input.value ) ) ) {
+                newOptions[input.name] = input.value
+            }
+        } );
+        pagination5.rebuild(newOptions)
+    } );
 </script>
 </body>
 </html>

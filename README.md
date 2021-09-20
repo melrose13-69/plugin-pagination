@@ -51,7 +51,7 @@ const pagination = new Pagination(paginationWrapper, { options });
 
 > `optional | default: `
 ```js
-    function handlePage(pageNumber, event, target) {
+    function handlePage(pageNumber, lastPageNumber, event) {
         pagination.changePage(pageNumber)
     }
 ```

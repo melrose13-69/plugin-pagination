@@ -81,7 +81,7 @@ export class Pagination extends Helpers {
             page.setAttribute( 'data-page', counter.toString() );
 
             page.addEventListener( 'click', ( e ) => {
-                this.pageHandle( counter, e, page );
+                this.pageHandle( counter, this.page, e );
             }, { once: true } );
 
             if ( isFirstPage ) {
@@ -145,8 +145,8 @@ export class Pagination extends Helpers {
         this.parent.removeAttribute( 'class' );
     }
 
-    init() {
-        this._createOptions();
+    init(options = {}) {
+        this._createOptions(options);
         this._renderPagination()();
     }
 
@@ -174,7 +174,6 @@ export class Pagination extends Helpers {
     }
 
     rebuild( options ) {
-        this._createOptions( options );
-        this._renderPagination()();
+        this.init(options)
     }
 }
