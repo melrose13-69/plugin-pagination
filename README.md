@@ -8,9 +8,6 @@ VanillaJS Pagination Plugin with custom handler
 ```js
 npm install poltoratchi-pagination-js-plugin
 ```
-
-> or use `pagination.js` file from `dist` folder. `Pagination` will be available on `window`.
-
 # Use
 ```html
 <ul id="pagination"></ul>
