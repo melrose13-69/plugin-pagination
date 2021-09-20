@@ -20,8 +20,8 @@ npm install poltoratchi-pagination-js-plugin
 import Pagination from 'poltoratchi-pagination-js-plugin';
 
 
-const paginationWrapper = document.querySelector('#pagination')
-const pagination = new Pagination(paginationWrapper, { options })
+const paginationWrapper = document.querySelector('#pagination');
+const pagination = new Pagination(paginationWrapper, { options });
 ```
 # Options
 > `activeColor: string ( hex / rgb )` Color of active page button  `optional | default: 'red'`.
@@ -47,6 +47,10 @@ const pagination = new Pagination(paginationWrapper, { options })
 > `pagination.changePage(pageNumber)` Change the page `pageNumber: string|number`
 
 > `pagination.destroy()` Destroy the pagination and remove elements;
+
+> `pagination.init()` Initialize the pagination (you can make this before destroy);
+
+> `pagination.rebuild(options)` Rebuild pagination with new options ( default | {} );
 
 # CSS classes
 You can override style using these classes
